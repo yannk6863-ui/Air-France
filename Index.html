@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Air France</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  body{
+    margin:0;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: linear-gradient(135deg,#002157,#005aa7);
+    color:#1a1a1a;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .container{
+    width:100%;
+    max-width:420px;
+    background:#fff;
+    border-radius:16px;
+    box-shadow:0 20px 40px rgba(0,0,0,.25);
+    overflow:hidden;
+  }
+
+  .header{
+    background:#002157;
+    color:#fff;
+    padding:22px;
+    text-align:center;
+  }
+
+  .header h1{
+    margin:0;
+    font-size:22px;
+    letter-spacing:.5px;
+  }
+
+  .header p{
+    margin:6px 0 0;
+    font-size:12px;
+    opacity:.8;
+  }
+
+  .content{
+    padding:24px;
+  }
+
+  label{
+    display:block;
+    font-weight:600;
+    margin-bottom:8px;
+  }
+
+  input{
+    width:100%;
+    padding:14px;
+    border-radius:10px;
+    border:1px solid #ccc;
+    font-size:16px;
+    margin-bottom:16px;
+  }
+
+  button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:#005aa7;
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+  }
+
+  button:hover{
+    background:#003f7f;
+  }
+
+  .error{
+    margin-top:14px;
+    color:#c62828;
+    font-weight:600;
+    display:none;
+  }
+
+  /* Billet */
+  .ticket{
+    display:none;
+    margin-top:20px;
+    border:2px dashed #005aa7;
+    border-radius:14px;
+    padding:18px;
+    background:#f7fbff;
+  }
+
+  .ticket h2{
+    margin:0 0 12px;
+    text-align:center;
+    color:#002157;
+  }
+
+  .row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:8px;
+    font-size:14px;
+  }
+
+  .row strong{
+    color:#002157;
+  }
+
+  .footer{
+    margin-top:14px;
+    text-align:center;
+    font-size:11px;
+    color:#666;
+  }
+
+  .disclaimer{
+    margin-top:10px;
+    background:#fff3cd;
+    color:#856404;
+    padding:10px;
+    border-radius:8px;
+    font-size:11px;
+    text-align:center;
+  }
+</style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Billet Avion – Vérification</h1>
+      <p></p>
+    </div>
+
+    <div class="content">
+      <label>Numéro de billet</label>
+      <input type="text" id="ticketNumber" placeholder="Ex : AFxxxxxxxxxxxx">
+
+      <button onclick="checkTicket()">Rechercher</button>
+
+      <div class="error" id="errorMsg">❌ Billet introuvable</div>
+
+      <div class="ticket" id="ticket">
+        <h2>✈️ Billet confirmé</h2>
+
+        <div class="row"><span>Nom</span><strong>Aerona</strong></div>
+        <div class="row"><span>Prénom</span><strong>Henri</strong></div>
+        <div class="row"><span>Pays</span><strong>France</strong></div>
+        <div class="row"><span>Ville</span><strong>Nice</strong></div>
+
+        <hr>
+
+        <div class="row"><span>Pays d’arrivée</span><strong>Allemagne</strong></div>
+        <div class="row"><span>Ville d’arrivée</span><strong>Berlin</strong></div>
+        <div class="row"><span>Aéroport d’arrivée</span><strong>Brandenburg (BER)</strong></div>
+
+        <hr>
+
+        <div class="row"><span>Aéroport départ</span><strong>Côte d’Azur (NCE)</strong></div>
+        <div class="row"><span>Date</span><strong>Mardi 23 / 2025</strong></div>
+        <div class="row"><span>Départ</span><strong>16:30</strong></div>
+        <div class="row"><span>Arrivée</span><strong>18:30</strong></div>
+
+        <hr>
+
+        <div class="row"><span>Somme payée</span><strong>80 €</strong></div>
+
+        <div class="footer">
+          Code billet : AF12671812202025
+        </div>
+      </div>
+
+      <div class="disclaimer">
+       
+      </div>
+    </div>
+  </div>
+
+<script>
+function checkTicket(){
+  const input = document.getElementById("ticketNumber").value.trim();
+  const ticket = document.getElementById("ticket");
+  const error = document.getElementById("errorMsg");
+
+  if(input === "AF12671812202025"){
+    ticket.style.display = "block";
+    error.style.display = "none";
+  } else {
+    ticket.style.display = "none";
+    error.style.display = "block";
+  }
+}
+</script>
+</body>
+</html>
