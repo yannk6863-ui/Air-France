@@ -1,203 +1,353 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>Air France</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<title>Plateforme de Billetterie Aérienne – Prototype</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-  body{
-    margin:0;
-    font-family: "Segoe UI", Roboto, Arial, sans-serif;
-    background: linear-gradient(135deg,#002157,#005aa7);
-    color:#1a1a1a;
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
+:root{
+  --red:#e10600;
+  --blue:#002157;
+  --light:#f4f6f9;
+  --dark:#1b1f2a;
+  --muted:#6b7280;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:var(--light);
+  color:var(--dark);
+}
 
-  .container{
-    width:100%;
-    max-width:420px;
-    background:#fff;
-    border-radius:16px;
-    box-shadow:0 20px 40px rgba(0,0,0,.25);
-    overflow:hidden;
-  }
+/* NAVBAR */
+.nav{
+  background:#fff;
+  border-bottom:1px solid #e5e7eb;
+  padding:16px 32px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.nav .brand{
+  font-size:22px;
+  font-weight:800;
+  color:var(--blue);
+  letter-spacing:.5px;
+}
+.nav .brand span{color:var(--red)}
+.nav .menu{
+  display:flex;
+  gap:24px;
+  font-weight:500;
+  color:var(--muted);
+}
 
-  .header{
-    background:#002157;
-    color:#fff;
-    padding:22px;
-    text-align:center;
-  }
+/* HERO */
+.hero{
+  background:linear-gradient(120deg,var(--blue),#003a8f);
+  color:#fff;
+  padding:64px 32px 80px;
+}
+.hero .wrap{
+  max-width:1100px;
+  margin:auto;
+}
+.hero h1{
+  font-size:42px;
+  font-weight:800;
+  margin:0 0 12px;
+}
+.hero p{
+  max-width:520px;
+  opacity:.9;
+  font-size:18px;
+}
 
-  .header h1{
-    margin:0;
-    font-size:22px;
-    letter-spacing:.5px;
-  }
+/* SEARCH CARD */
+.search-card{
+  margin-top:48px;
+  background:#fff;
+  border-radius:18px;
+  box-shadow:0 30px 60px rgba(0,0,0,.25);
+  padding:32px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:16px;
+}
+.search-card input{
+  padding:18px;
+  border-radius:12px;
+  border:1px solid #d1d5db;
+  font-size:16px;
+}
+.search-card button{
+  padding:18px 28px;
+  border:none;
+  border-radius:12px;
+  background:var(--red);
+  color:#fff;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+}
+.search-card button:hover{background:#b80000}
 
-  .header p{
-    margin:6px 0 0;
-    font-size:12px;
-    opacity:.8;
-  }
+/* MAIN */
+.main{
+  max-width:1100px;
+  margin:-60px auto 80px;
+  padding:0 32px;
+}
 
-  .content{
-    padding:24px;
-  }
+/* TICKET */
+.ticket{
+  display:none;
+  background:#fff;
+  border-radius:20px;
+  box-shadow:0 20px 50px rgba(0,0,0,.15);
+  overflow:hidden;
+}
+.ticket-head{
+  background:linear-gradient(90deg,var(--red),#ff4b4b);
+  color:#fff;
+  padding:28px 32px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.ticket-head h2{margin:0;font-size:22px}
+.ticket-head .price{font-size:26px;font-weight:800}
 
-  label{
-    display:block;
-    font-weight:600;
-    margin-bottom:8px;
-  }
+.ticket-body{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+}
 
-  input{
-    width:100%;
-    padding:14px;
-    border-radius:10px;
-    border:1px solid #ccc;
-    font-size:16px;
-    margin-bottom:16px;
-  }
+.ticket-left{
+  padding:32px;
+}
+.ticket-right{
+  padding:32px;
+  background:#f9fafb;
+  border-left:1px dashed #d1d5db;
+}
 
-  button{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:10px;
-    background:#005aa7;
-    color:#fff;
-    font-size:16px;
-    font-weight:600;
-    cursor:pointer;
-  }
+.section{
+  margin-bottom:28px;
+}
+.section h3{
+  margin:0 0 14px;
+  color:var(--blue);
+  font-size:16px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
 
-  button:hover{
-    background:#003f7f;
-  }
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px 24px;
+}
+.label{font-size:13px;color:var(--muted)}
+.value{font-weight:600}
 
-  .error{
-    margin-top:14px;
-    color:#c62828;
-    font-weight:600;
-    display:none;
-  }
+.flight{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+.airport{
+  text-align:center;
+}
+.airport strong{font-size:22px}
+.line{
+  flex:1;
+  height:2px;
+  background:#d1d5db;
+  position:relative;
+}
+.line:after{
+  content:'✈';
+  position:absolute;
+  left:50%;
+  top:-14px;
+  transform:translateX(-50%);
+  font-size:20px;
+  color:var(--red);
+}
 
-  /* Billet */
-  .ticket{
-    display:none;
-    margin-top:20px;
-    border:2px dashed #005aa7;
-    border-radius:14px;
-    padding:18px;
-    background:#f7fbff;
-  }
+.qr{
+  width:100%;
+  aspect-ratio:1/1;
+  border:2px dashed #d1d5db;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  color:#9ca3af;
+  text-decoration:none;
+  transition:.3s;
+}
+.qr:hover{background:#f3f4f6;color:#111827}
 
-  .ticket h2{
-    margin:0 0 12px;
-    text-align:center;
-    color:#002157;
-  }
 
-  .row{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:8px;
-    font-size:14px;
-  }
+.footer-note{
+  margin-top:16px;
+  font-size:12px;
+  color:#6b7280;
+}
 
-  .row strong{
-    color:#002157;
-  }
+/* ERROR */
+.error{
+  display:none;
+  margin-top:20px;
+  background:#fee2e2;
+  color:#991b1b;
+  padding:16px;
+  border-radius:12px;
+  font-weight:600;
+}
 
-  .footer{
-    margin-top:14px;
-    text-align:center;
-    font-size:11px;
-    color:#666;
-  }
-
-  .disclaimer{
-    margin-top:10px;
-    background:#fff3cd;
-    color:#856404;
-    padding:10px;
-    border-radius:8px;
-    font-size:11px;
-    text-align:center;
-  }
+/* RESPONSIVE */
+@media(max-width:900px){
+  .ticket-body{grid-template-columns:1fr}
+  .ticket-right{border-left:none;border-top:1px dashed #d1d5db}
+  .search-card{grid-template-columns:1fr}
+  .hero h1{font-size:32px}
+}
 </style>
 </head>
 
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>Billet Avion – Vérification</h1>
-      <p></p>
+
+<nav class="nav">
+  <div class="brand">Plateforme de billetterie aérienne</div>
+  <div class="menu">
+    <span>Réserver</span>
+    <span>Mes voyages</span>
+    <span>Assistance</span>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Gérez vos voyages en toute confiance</h1>
+    <p>Consultez, vérifiez et présentez vos billets électroniques via une interface moderne, sécurisée et professionnelle.</p>
+
+    <div class="search-card">
+      <input id="code" placeholder="Entrez votre numéro de billet (ex: AF12671812202025)" />
+      <button onclick="check()">Rechercher</button>
+    </div>
+  </div>
+</section>
+
+<main class="main">
+
+  <div class="ticket" id="ticket">
+
+    <div class="ticket-head">
+      <div style="display:flex;align-items:center;gap:14px">
+        <!-- LOGO SUR LE BILLET UNIQUEMENT -->
+        <img src="logo.png" alt="Logo compagnie" style="height:36px;background:#fff;padding:6px;border-radius:8px">
+        <h2>Billet électronique confirmé</h2>
+      </div>
+      <h2>Billet électronique confirmé</h2>
+      <div class="price">80 €</div>
     </div>
 
-    <div class="content">
-      <label>Numéro de billet</label>
-      <input type="text" id="ticketNumber" placeholder="Ex : AFxxxxxxxxxxxx">
+    <div class="ticket-body">
 
-      <button onclick="checkTicket()">Rechercher</button>
+      <div class="ticket-left">
 
-      <div class="error" id="errorMsg">❌ Billet introuvable</div>
+        <div class="section">
+          <h3>Itinéraire</h3>
+          <div class="flight">
+            <div class="airport">
+              <strong>NCE</strong><br><span>Nice</span>
+            </div>
+            <div class="line"></div>
+            <div class="airport">
+              <strong>BER</strong><br><span>Berlin</span>
+            </div>
+          </div>
+        </div>
 
-      <div class="ticket" id="ticket">
-        <h2>✈️ Billet confirmé</h2>
+        <div class="section">
+          <h3>Informations passager</h3>
+          <div class="grid">
+            <div><div class="label">Nom</div><div class="value">Aerona</div></div>
+            <div><div class="label">Prénom</div><div class="value">Henri</div></div>
+            <div><div class="label">Pays</div><div class="value">France</div></div>
+            <div><div class="label">Ville</div><div class="value">Nice</div></div>
+          </div>
+        </div>
 
-        <div class="row"><span>Nom</span><strong>Aerona</strong></div>
-        <div class="row"><span>Prénom</span><strong>Henri</strong></div>
-        <div class="row"><span>Pays</span><strong>France</strong></div>
-        <div class="row"><span>Ville</span><strong>Nice</strong></div>
+        <div class="section">
+          <h3>Détails du vol</h3>
+          <div class="grid">
+            <div><div class="label">Aéroport départ</div><div class="value">Côte d’Azur (NCE)</div></div>
+            <div><div class="label">Aéroport arrivée</div><div class="value">Brandenburg (BER)</div></div>
+            <div><div class="label">Date</div><div class="value">Mardi 23 / 2025</div></div>
+            <div><div class="label">Horaire</div><div class="value">16:30 – 18:30</div></div>
+          </div>
+        </div>
 
-        <hr>
+      </div>
 
-        <div class="row"><span>Pays d’arrivée</span><strong>Allemagne</strong></div>
-        <div class="row"><span>Ville d’arrivée</span><strong>Berlin</strong></div>
-        <div class="row"><span>Aéroport d’arrivée</span><strong>Brandenburg (BER)</strong></div>
-
-        <hr>
-
-        <div class="row"><span>Aéroport départ</span><strong>Côte d’Azur (NCE)</strong></div>
-        <div class="row"><span>Date</span><strong>Mardi 23 / 2025</strong></div>
-        <div class="row"><span>Départ</span><strong>16:30</strong></div>
-        <div class="row"><span>Arrivée</span><strong>18:30</strong></div>
-
-        <hr>
-
-        <div class="row"><span>Somme payée</span><strong>80 €</strong></div>
-
-        <div class="footer">
-          Code billet : AF12671812202025
+      <div class="ticket-right">
+        <div class="section">
+          <h3>Embarquement</h3>
+          <canvas id="qrcode" class="qr"></canvas>
+          <div class="footer-note">
+            Billet n° AF12671812202025<br>
+            Présenter ce billet à l’enregistrement
+          </div>
         </div>
       </div>
 
-      <div class="disclaimer">
-       
-      </div>
     </div>
+
   </div>
 
-<script>
-function checkTicket(){
-  const input = document.getElementById("ticketNumber").value.trim();
-  const ticket = document.getElementById("ticket");
-  const error = document.getElementById("errorMsg");
+  <div class="error" id="error">Numéro de billet invalide ou introuvable.</div>
 
-  if(input === "AF12671812202025"){
-    ticket.style.display = "block";
-    error.style.display = "none";
-  } else {
-    ticket.style.display = "none";
-    error.style.display = "block";
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+<script>
+function check(){
+  const v=document.getElementById('code').value.trim();
+  const t=document.getElementById('ticket');
+  const e=document.getElementById('error');
+  if(v==='AF12671812202025'){
+    t.style.display='block';
+    e.style.display='none';
+    t.scrollIntoView({behavior:'smooth'});
+
+    // Génération QR code réel
+    const canvas = document.getElementById('qrcode');
+    QRCode.toCanvas(canvas, 'https://www.airfrance.fr', {
+      width:220,
+      margin:2,
+      color:{
+        dark:'#002157',
+        light:'#ffffff'
+      }
+    });
+
+  }else{
+    t.style.display='none';
+    e.style.display='block';
   }
 }
 </script>
+
 </body>
 </html>
